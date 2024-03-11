@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Nome: karine macedo Santos Turma: 3A-->
+<html lang="pt-BR">
+<head>
+    <title>Primos V1 for</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div>
+      <h1>Verificar se um número é primo</h1>  
+      <label style="font-size: 20px;">Número:</label>
+      <input type="text" id="Numero1" autofocus><br>
+      <button onclick="verificarPrimo()">Primo?</button><br><br>
+      <canvas id="meuCanvas" width="400" height="200" style="border: 1px solid #000;"></canvas>
+    </div>
+    
+    <script>
+        function recebeNumero() {
+            return parseInt(document.getElementById("Numero1").value, 10);
+        }
+
+        function verificarPrimo() {
+            var canvas = document.getElementById('meuCanvas');
+            if (canvas.getContext) {
+                var cntxt = canvas.getContext('2d');
+                var maxWidth = 300;
+                var lineWidth = 35;
+                var x = (canvas.width - maxWidth) / 2;
+                var y = 100;
+                var N1 = recebeNumero();
+
+                cntxt.fillStyle = "rgb(225, 255, 255)";
+                cntxt.fillRect(0, 0, canvas.width, canvas.height);
+                cntxt.font = "30px Comic Sans MS";
+
+                let contador = 3;
+                let line = N1 + " ";
+                let resposta = "é primo!";
+
+                if (N1 < 2 || (N1 % 2 == 0 && N1 != 2)) {
+                    resposta = "não é primo";
+                } else {
+                    while (contador <= Math.sqrt(N1)) {
+                        if (N1 % contador == 0) {
+                            resposta = "não é primo!"
+                            break;
+                        }
+                        contador += 2;
+                    }
+                }
+
+                line = line + resposta;
+                cntxt.fillText(line, x, y);
+                cntxt.strokeText(line, x, y);
+                document.getElementById("Numero1").value = "";
+                document.getElementById("Numero1").focus();
+            }
+        }
+    </script>
+</body>
+</html>
